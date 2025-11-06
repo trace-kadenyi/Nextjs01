@@ -2,7 +2,12 @@ import React from "react";
 import Link from "next/link";
 
 
-export default function About() {
+export default async function About() {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("intentional delay")
+    }, 1000)
+  })
   return (
     <div>
       <h1>About</h1>
