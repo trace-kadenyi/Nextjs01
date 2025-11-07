@@ -8,6 +8,8 @@ export default async function About() {
       resolve("intentional delay")
     }, 1000)
   })
+
+  // throw new Error("Not today")
   return (
     <div>
       <h1>About</h1>
