@@ -23,7 +23,7 @@ export async function generateMetadata({
   const userData: Promise<User> = getUser(userId);
   const user: User = await userData;
 
-  if (!user.name) {
+  if (!user) {
     return {
       title: "User Not Found",
     };
