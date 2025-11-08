@@ -48,6 +48,7 @@ export default async function UserPage({
 
   const user = await userData;
 
+  if (!user || !user.name) return notFound();
   return (
     <>
       <h2>{user.name}</h2>
@@ -64,6 +65,6 @@ export async function generateStaticParams() {
   const users = await usersData;
 
   return users.map((user) => ({
-    usreId: user.id.toString(),
+    userId: user.id.toString(),
   }));
 }
