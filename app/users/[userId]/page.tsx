@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import getUser from "@/lib/getUser";
 import getUserPosts from "@/lib/getUserPosts";
@@ -21,6 +22,12 @@ export async function generateMetadata({
 
   const userData: Promise<User> = getUser(userId);
   const user: User = await userData;
+
+  if (!user.name) {
+    return {
+      title: "User Not Found",
+    };
+  }
 
   return {
     title: user.name,
