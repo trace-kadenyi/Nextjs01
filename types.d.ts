@@ -9,3 +9,8 @@ type Result = {
   };
 };
 
+type SearchResult = {
+  query?: {
+    pages?: Result[];
+  };
+};
