@@ -51,7 +51,39 @@ export async function POST(request: Request) {
   });
 
   const newTodo: Todo = await res.json();
-  console.log(newTodo)
+  console.log(newTodo);
 
   return NextResponse.json(newTodo);
+}
+
+// PUT
+export async function PUT(request: Request) {
+  const { userId, id, title, completed }: Todo = await request.json();
+
+  //   if (!userId || !id || !title || typeof completed !== "boolean")
+  //     return NextResponse.json({ message: "Missing required data." });
+
+  if (!userId || !id)
+    return NextResponse.json({ message: "Missing userId or ID" });
+  if (!title) return NextResponse.json({ message: "Missing title" });
+  if (typeof completed !== "boolean")
+    return NextResponse.json({ message: "Completed must be True or False" });
+
+  const res = await fetch(`${DATA_SOURCE_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "API-Key": API_KEY,
+    },
+    body: JSON.stringify({
+      userId,
+      title,
+      completed,
+    }),
+  });
+
+  const updatedTodo: Todo = await res.json();
+  console.log(updatedTodo);
+
+  return NextResponse.json(updatedTodo);
 }
