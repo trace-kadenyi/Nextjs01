@@ -83,7 +83,6 @@ export async function PUT(request: Request) {
   });
 
   const updatedTodo: Todo = await res.json();
-  console.log(updatedTodo);
 
   return NextResponse.json(updatedTodo);
 }
