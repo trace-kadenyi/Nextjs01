@@ -51,7 +51,6 @@ export async function POST(request: Request) {
   });
 
   const newTodo: Todo = await res.json();
-  console.log(newTodo);
 
   return NextResponse.json(newTodo);
 }
