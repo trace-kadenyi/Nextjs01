@@ -3,14 +3,10 @@ import { NextResponse } from "next/server";
 export function middleware(request: Request) {
   // METHOD 1
   // const regex = new RegExp('/api/*')
-  // if(regex.test(request.url)) {
-
-  // }
+  // if(regex.test(request.url)) {}
 
   // METHOD 2
-  // if(request.url.includes('/api/*')) {
-
-  // }
+  // if(request.url.includes('/api/*')) {}
 
   console.log(request.method);
   console.log(request.url);
