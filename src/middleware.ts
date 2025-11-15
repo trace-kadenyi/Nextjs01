@@ -12,7 +12,7 @@ export function middleware(request: Request) {
   console.log(request.url);
 
   const origin = request.headers.get("origin");
-  console.log(origin);
+  // console.log(origin);
 
   return NextResponse.next();
 }
