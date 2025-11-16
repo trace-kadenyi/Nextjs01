@@ -7,7 +7,7 @@ export async function GET(request: Request) {
 
   const remaining = await limiter.removeTokens(1);
 
-  console.log("remaining", remaining);
+  // console.log("remaining", remaining);
 
   if (remaining < 0) {
     return new NextResponse(null, {
