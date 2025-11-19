@@ -1,10 +1,9 @@
 import "./globals.css";
 
 import Navbar from "./components/Navbar";
-import MyProfilePic from "./components/MyProfilePic";
 
 export const metadata = {
-  title: "Kadenyi's Blog",
+  title: "Next Todos",
   description: "Created by Tracey Kadenyi",
 };
 
@@ -17,8 +16,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="dark:bg-slate-800">
         <Navbar />
-        <MyProfilePic />
-        {children}
+        <main className="mx-auto max-w-xl p-4 bg-stone-200 min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );
