@@ -1,7 +1,7 @@
 "use client";
 
 import { FaTrash } from "react-icons/fa";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState, useTransition, ChangeEvent, MouseEvent } from "react";
 useState;
 import Link from "next/link";
@@ -28,7 +28,62 @@ export default function Todo(todo: Todo) {
     });
 
     await res.json();
+
+    setIsFetching(false);
+
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
-  return <div>Todo</div>;
+  const TrashIcon = FaTrash as unknown as React.FC;
+
+  const handleDelete = async (e: MouseEvent<HTMLButtonElement>) => {
+    setIsFetching(true);
+
+    const res = await fetch(`http://127.0.0.0.1:3500/todos/${todo.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: todo.id,
+      }),
+    });
+    await res.json();
+    setIsFetching(false);
+
+    startTransition(() => {
+      router.refresh();
+    });
+  };
+
+  return (
+    <article
+      className="my=4 flex justify-between items-center"
+      style={{ opacity: !isMutating ? 1 : 0.7 }}
+    >
+      <label className="text-2xl hover:underline">
+        <Link href={`/edit/${todo.id}`}>{todo.title}</Link>
+      </label>
+      <div className="flex items-center gap-4">
+        <input
+          type="checkbox"
+          name="completed"
+          id="completed"
+          checked={todo.completed}
+          onChange={handleChange}
+          disabled={isPending}
+          className="min-w-[2rem] min-h-[2rem]"
+        />
+        <button
+          onClick={handleDelete}
+          disabled={isPending}
+          className="p-3 rounded-2xl text-black border-solid border-black border-2 max-w-xs bg-red-400 hover:cursor-pointer hover:bg-red-300"
+        >
+          <TrashIcon />
+        </button>
+      </div>
+    </article>
+  );
 }
