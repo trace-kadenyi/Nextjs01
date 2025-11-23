@@ -1,5 +1,6 @@
 import Posts from "./components/Posts";
 
+// revalidate
 export const revalidate = 10;
 
 export default function Home() {
