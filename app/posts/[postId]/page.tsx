@@ -3,12 +3,14 @@ import { getPostData, getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+// generate static params
 export function generateStaticParams() {
   const posts = getSortedPostsData(); // deduped!
 
   return posts.map((post) => ({ postId: post.id }));
 }
 
+// generate metadata
 export function generateMetadata({ params }: { params: { postId: string } }) {
   const posts = getSortedPostsData();
   const { postId } = params;
@@ -35,7 +37,6 @@ export default async function Post({ params }: { params: { postId: string } }) {
   }
 
   const { title, date, contentHtml } = await getPostData(postId);
-
   const pubDate = getFormattedDate(date);
 
   return (
