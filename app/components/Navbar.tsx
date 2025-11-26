@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FaYoutube, FaTwitter, FaGithub, FaLaptop } from "react-icons/fa";
 
 export default function Navbar() {
+  // social media links
   const YoutubeIcon = FaYoutube as unknown as React.FC;
   const TwitterIcon = FaTwitter as unknown as React.FC;
   const GithubIcon = FaGithub as unknown as React.FC;
