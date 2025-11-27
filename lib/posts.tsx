@@ -1,3 +1,27 @@
+type Filetree = {
+  "tree": [
+    {
+      "path": string
+    }
+  ]
+}
+
+export async function getPostsMeta(): Promise<Meta[] | undefined> {
+  const res = await fetch(
+    "https://api.github.com/repos/gitdagray/test-blogposts/git/trees/main?recursive=1",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${process.env.GTIHUB_TOKEN}`,
+        "x-Github-Api-Version": "2022-11-28",
+      },
+    }
+  );
+
+  if(!res.ok) return undefined
+}
+
+
 // import fs from "fs";
 // import path from "path";
 // import matter from "gray-matter";
@@ -54,18 +78,3 @@
 
 //   return blogPostWithHtml;
 // }
-
-export async function getPostsMeta(): Promise<Meta[] | undefined> {
-  const res = await fetch(
-    "https://api.github.com/repos/gitdagray/test-blogposts/git/trees/main?recursive=1",
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GTIHUB_TOKEN}`,
-        "x-Github-Api-Version": "2022-11-28",
-      },
-    }
-  );
-
-  if(!res.ok) return undefined
-}
