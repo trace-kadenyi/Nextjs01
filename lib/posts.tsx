@@ -21,6 +21,10 @@ export async function getPostsByName(
   );
 
   if (!res.ok) return undefined;
+
+  const rawMDX = await res.text();
+
+  if (rawMDX === "404: Not found") return undefined;
 }
 
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
