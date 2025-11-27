@@ -6,6 +6,23 @@ type Filetree = {
   ];
 };
 
+export async function getPostsByName(
+  fileName: string
+): Promise<BlogPost | undefined> {
+  const res = await fetch(
+    `https://raw.githubusercontent.com/gitdagray/test-blogposts/main/${fileName}`,
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${process.env.GTIHUB_TOKEN}`,
+        "x-Github-Api-Version": "2022-11-28",
+      },
+    }
+  );
+
+  if (!res.ok) return undefined;
+}
+
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const res = await fetch(
     "https://api.github.com/repos/gitdagray/test-blogposts/git/trees/main?recursive=1",
@@ -29,7 +46,7 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const posts: Meta[] = [];
 
   for (const file of filesArray) {
-    const post = await getPostByName(file);
+    const post = await getPostsByName(file);
     if (post) {
       const { meta } = post;
       posts.push(meta);
