@@ -6,7 +6,7 @@ type Filetree = {
   ];
 };
 
-export async function getPostsByName(
+export async function getPostByName(
   fileName: string
 ): Promise<BlogPost | undefined> {
   const res = await fetch(
@@ -50,7 +50,7 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const posts: Meta[] = [];
 
   for (const file of filesArray) {
-    const post = await getPostsByName(file);
+    const post = await getPostByName(file);
     if (post) {
       const { meta } = post;
       posts.push(meta);
