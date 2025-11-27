@@ -1,10 +1,10 @@
 type Filetree = {
-  "tree": [
+  tree: [
     {
-      "path": string
+      path: string;
     }
-  ]
-}
+  ];
+};
 
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const res = await fetch(
@@ -18,9 +18,14 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
     }
   );
 
-  if(!res.ok) return undefined
-}
+  if (!res.ok) return undefined;
 
+  const respoFiletree: Filetree = await res.json();
+
+  const filesArray = respoFiletree.tree
+    .map((obj) => obj.path)
+    .filter((path) => path.endsWith("mdx"));
+}
 
 // import fs from "fs";
 // import path from "path";
