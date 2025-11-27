@@ -25,6 +25,18 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const filesArray = respoFiletree.tree
     .map((obj) => obj.path)
     .filter((path) => path.endsWith("mdx"));
+
+  const posts: Meta[] = [];
+
+  for (const file of filesArray) {
+    const post = await getPostByName(file);
+    if (post) {
+      const { meta } = post;
+      posts.push(meta);
+    }
+  }
+
+  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 // import fs from "fs";
