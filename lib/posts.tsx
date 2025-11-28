@@ -6,6 +6,7 @@ type Filetree = {
   ];
 };
 
+// get post by name
 export async function getPostByName(
   fileName: string
 ): Promise<BlogPost | undefined> {
@@ -27,6 +28,7 @@ export async function getPostByName(
   if (rawMDX === "404: Not found") return undefined;
 }
 
+// get posts meta
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
   const res = await fetch(
     "https://api.github.com/repos/gitdagray/test-blogposts/git/trees/main?recursive=1",
