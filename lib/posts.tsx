@@ -21,6 +21,7 @@ export async function getPostByName(
     }
   );
 
+  // if faulty response
   if (!res.ok) return undefined;
 
   const rawMDX = await res.text();
