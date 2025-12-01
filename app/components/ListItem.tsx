@@ -7,7 +7,9 @@ type Props = {
 };
 
 export default function ListItem({ post }: Props) {
+  // post data
   const { id, title, date } = post;
+  // formatted date
   const formattedDate = getFormattedDate(date);
 
   return (
